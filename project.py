@@ -1,3 +1,17 @@
+import os
+from functions.getBooks import get_book, get_all_books
+from functions.searchBook import search_book
+from functions.addNewBook import add_book
+
+def clear_terminal():
+    # Check the operating system name
+    if os.name == 'nt':
+        # For Windows, use 'cls' command
+        _ = os.system('cls')
+    else:
+        # For Linux, macOS, and other POSIX systems, use 'clear' command
+        _ = os.system('clear')
+
 books = {
     '1': {
         'Title': 'Bhagwat Geeta',
@@ -61,25 +75,8 @@ books = {
     }
 }
 
-
-def add_book(book_id , title , author , year , copies):
-    if(book_id in books):
-        print(f"This book ID is already exist")
-        return
-
-    books[book_id] = {
-        'Title' : title,
-        'Author' : author,
-        'Year' : year,
-        'Copies' : copies
-    }
-
-def get_book(book_id):
-    # print(books[book_id])
-    print(f"\n\nBook Detail :--\n{book_id} | {books[book_id]['Title']} by {books[book_id]['Author']} ({books[book_id]['Year']}) - Copies: {books[book_id]['copies']}\n\n")
-
 while 1:
-    print("1. Add new Book\n2. Display book by Book_id\n3. Exit")
+    print("1. Add new Book\n2. Display book by Book_id\n3. Get All books\n4. Search book by name\n5. Exit")
     c = int(input('Enter Your Choice:--'))
 
     match c:
@@ -90,64 +87,24 @@ while 1:
             author = input()
             year = int(input())
             copies = input()
-            add_book(id , title , author , year , copies)
+            add_book(id , title , author , year , copies , books)
 
         case 2:
+            clear_terminal()
             id = input("Enter Book ID:--")
-            get_book(id)
+            get_book(id , books)
 
         case 3:
+            clear_terminal()
+            get_all_books(books)
+
+        case 4:
+            clear_terminal()
+            book_name = input("Enter book name :-")
+            book_name = book_name.lower()
+            search_book(book_name , books)
+
+        case 5:
             print("Exit")
-
+            clear_terminal()
             break
-
-
-
-
-# class Book :
-#     def __init__(self , book_id , title , author , year , copies):
-#         self._book_id = book_id
-#         self._title = title
-#         self._author = author
-#         self._year = year
-#         self._copies = copies
-#
-#     def isAvailable(self):
-#         return self._copies > 0
-#
-#     def availableCopies(self):
-#         return self._copies
-#
-#
-# class Members:
-#     def __init__(self , member_id , name , number):
-#         self._member_id = member_id
-#         self._name = name
-#         self._number = number
-#
-#     def getMemberDetails(self):
-#         return {
-#             'id' : self._member_id,
-#             'name' : self._name,
-#             'number' : self._3
-#         }
-#
-#
-# class Staff:
-#     def __init__(self , staff_id , name , role):
-#         self._staff_id = staff_id
-#         self._name = name
-#         self._role = role
-#
-#     def getStaffDetails(self):
-#         return {
-#             'id' : self._staff_id,
-#             'name' : self._name,
-#             'role' : self._role
-#         }
-#
-# class Library:
-#     def __init__(self):
-#         self.books = {}
-#
-#     def add_book(self):
