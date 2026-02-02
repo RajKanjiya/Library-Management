@@ -2,6 +2,8 @@ import os
 from functions.getBooks import get_book, get_all_books
 from functions.searchBook import search_book
 from functions.addNewBook import add_book
+from functions.updateBook import update_book
+
 
 def clear_terminal():
     # Check the operating system name
@@ -76,7 +78,7 @@ books = {
 }
 
 while 1:
-    print("1. Add new Book\n2. Display book by Book_id\n3. Get All books\n4. Search book by name\n5. Exit")
+    print("1. Add new Book\n2. Display book by Book_id\n3. Display All books\n4. Search book by book name\n5. Update Book\n6. Exit")
     c = int(input('Enter Your Choice:--'))
 
     match c:
@@ -105,6 +107,12 @@ while 1:
             search_book(book_name , books)
 
         case 5:
+            clear_terminal()
+            book_name = input("Enter book name :-")
+            book_name = book_name.lower()
+            update_book(book_name, books)
+
+        case 6:
             print("Exit")
             clear_terminal()
             break

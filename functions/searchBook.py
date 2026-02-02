@@ -10,8 +10,13 @@ def search_book(book_name , books):
         if(lower_title.count(book_name)):
             book[book_id] = books[book_id]
 
+
+
     if len(book) > 0:
+        print("\nBook_ID\n")
         for book_id in book:
-            print(f"{book_id} | {books[book_id]['Title']} by {books[book_id]['Author']} ({books[book_id]['Year']}) - Copies: {books[book_id]['copies']}\n")
+            print(f"{str(book_id).ljust(6 , ' ')} | {books[book_id]['Title']} by {books[book_id]['Author']} ({books[book_id]['Year']}) - Copies: {books[book_id]['copies']}\n")
     else:
-        print("Book is not found")
+        print("\nBook is not found\n")
+
+    return book
